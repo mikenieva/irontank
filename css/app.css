@@ -1,13 +1,12 @@
 html, body {
     margin: 0;
     padding: 0;
-    background-color: #151515;
+    font-family: 'Roboto', sans-serif;
 }
 
 canvas {
     display: block;
     margin: auto;
-
     position: absolute;
     top: 0;
     bottom: 0;
@@ -15,57 +14,54 @@ canvas {
     right: 0;
 }
 
-.wrapper {
-    width: 512px;
-    margin: 0 auto;
-    margin-top: 2em;
-}
-
-#instructions {
-    float: left;
-    font-family: sans-serif;
-    color: #757575;
-}
-
-#score {
-    float: right;
+header{
+    background-color: #2b2e32;
     color: white;
-    font-size: 2em;
-}
-
-.key {
-    color: #aaffdd;
-}
-
-#game-over, #game-over-overlay {
-    margin: auto;
-    width: 512px;
-    height: 480px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
-    display: none;
-}
-
-#game-over-overlay {
-    background-color: black;
-    opacity: .5;
-}
-
-#game-over {
-    height: 200px;
+    height: 70px;
     text-align: center;
+    font-size: 44px;
+}
+
+header section{
+    padding-top: 10px;
+}
+
+.envolvedor {
+    margin: 0 auto;
+    margin-top: 1em;
+    background-color: #2b2e32;
     color: white;
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+    height: 49px;
+    width: 900px;
 }
 
-#game-over h1 {
-    font-size: 3em;
-    font-family: sans-serif;
+.messages{
+    
 }
 
-#game-over button {
-    font-size: 1.5em;
+#game-over{
+    display: block;
+    text-align: center;
+    margin-top: 500px;
+}
+
+#play-again{
+    background-color: #2e7eb8;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#music{
+    vertical-align: top;
+    margin-top: 7px;
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+#score{
+    margin-top: 4px;
+    margin-right: 50px;
 }

@@ -37,8 +37,8 @@ const main = () => {
 
 
 const init = () => {
-    ctx.drawImage(resources.get('images/terreno.bmp'),0,0);
     terrainPattern = ctx.createPattern(resources.get('images/sand.png'), 'repeat');
+    console.log(terrainPattern);
 
     ctx.font = "30px Arial";
     ctx.strokeText("Hello World",80,150);
@@ -72,7 +72,8 @@ resources.load([
     'images/bullets.bmp',
     'images/terreno.bmp',
     'images/boss-minotaur/minotaur-die.png',
-    'images/bulletup.png'
+    'images/bulletup.png',
+    'images/boss-kobold/kobold.png'
 ]);
 resources.onReady(init);
 
@@ -110,14 +111,33 @@ const update = (dt) => {
 
     handleInput(dt);
     updateEntities(dt);
+
+    console.log(gameTime);
+
+    if(gameTime > 0 && gameTime < 35){
     // Exponencia los enemigos en pantalla
-    if(Math.random() < 1 - Math.pow(.995, gameTime)) {
-        enemies.push({
-            pos: [canvas.width,
+        if(Math.random() < 1 - Math.pow(.995, gameTime)) {
+            enemies.push({
+                pos: [canvas.width,
                   Math.random() * (canvas.height - 39)],
-            sprite: new Sprite('images/boss-minotaur/minotaur-attack1-00.png', [0, 0], [74, 77],16, [0, 1, 2, 3, 2, 1])
-        });
+                sprite: new Sprite('images/boss-minotaur/minotaur-attack1-00.png', [0, 0], [74, 77],16, [0, 1, 2, 3, 2, 1])
+            });
+        }
     }
+
+    if(gameTime > 40){
+        // Exponencia los enemigos en pantalla
+            if(Math.random() < 1 - Math.pow(.995, gameTime)) {
+                enemies.push({
+                    pos: [canvas.width,
+                      Math.random() * (canvas.height - 39)],
+                    sprite: new Sprite('images/boss-kobold/kobold.png', [68, 35], [68, 35],16, [0, 1,2,1,0])
+                });
+            }
+        }
+    
+
+
     checkCollisions();
 
     scoreEl.innerHTML = "Score: " + score;
@@ -150,7 +170,7 @@ const handleInput = (dt) => {
 
         bullets.push({ pos: [x, y],
                        dir: 'forward',
-                       sprite: new Sprite('images/bullets.bmp', [0, 0], [9, 5]) });
+                       sprite: new Sprite('images/bullets.bmp', [10,10], [9, 5]) });
         bullets.push({ pos: [x, y],
                        dir: 'up',
                        sprite: new Sprite('images/bullets.bmp', [0, 0], [9, 7]) });
@@ -245,22 +265,30 @@ const checkCollisions = () => {
                 score += 100;
 
                 if (score == 800){
-                    console.log("Fuckin' Awesome!");
+                    document.getElementById("messages").innerHTML = "800. Fuckin' Awesome!";
                 } else if (score == 5000){
-                    console.log("Nice shot!");
+                    document.getElementById("messages").innerHTML = "5000. Nice shot!";
                 } else if (score == 10000){
-                    console.log("Keep moving on!");
+                    document.getElementById("messages").innerHTML = "10,000.Go Go Go!";
                 } else if (score == 20000){
-                    console.log("20000! That's great!");
+                    document.getElementById("messages").innerHTML = "20,000 points. That's great!";
                 } else if (score == 80000){
-                    console.log("80000! A big boss is approaching!");
+                    document.getElementById("messages").innerHTML = "80,000 points. You are awesome";
                 }
 
-                // Agregar una explosión
+                if(gameTime > 0 && gameTime < 35){
                 explosions.push({
                     pos: pos,
                     sprite: new Sprite('images/boss-minotaur/minotaur-die.png',[0, 0],                                       [73, 78],14,[0, 1, 2, 3, 4, 5],null,true)
-                });
+                    });
+                }
+                
+                if(gameTime > 40){
+                    explosions.push({
+                        pos: pos,
+                        sprite: new Sprite('images/boss-kobold/kobold.png',[272, 140],                                       [68, 35],5,[0, 1, 2, 3, 4],null,true)
+                        });
+                    }
 
                 // Quita la bala y detén la iteración
                 bullets.splice(j, 1);
@@ -294,7 +322,7 @@ const checkPlayerBounds = () => {
 // Dibujar todo
 const render = () => {
     ctx.fillStyle = terrainPattern;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     // Renderear el juego si no hay Game Over
     if(!isGameOver) {

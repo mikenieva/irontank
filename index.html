@@ -4,19 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="css/app.css">
     <title>IronTank</title>
 </head>
 <body>
-  <div id="game-over-overlay"></div>
-  <div id="game-over">
-    <h1>GAME OVER</h1>
-    <button id="play-again">Play Again</button>
-  </div>
 
-  <div class="wrapper">
+  <header>
+    <section>
+      Irontank
+    </section>
+  </header>
+
+  <div id="game-over-overlay"></div>
+
+  <div class="envolvedor">
+    <button id="music">♫</button>
     <div style="display:inline-block" id="score"></div>
     <div style="display:inline-block"   id="distance"></div>
-    <button id="music">♫</button>
+    <div id="messages" style="float: right;margin-top: 14px;margin-right: 10px;padding: 0 17px;text-decoration: underline;font-size: 16px;"></div>
+  </div>
+
+  <div id="game-over">
+    <h1>Fin del Juego</h1>
+    <button id="play-again">Jugar nuevamente</button>
   </div>
 
 </body>
