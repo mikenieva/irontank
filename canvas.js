@@ -73,7 +73,8 @@ resources.load([
     'images/terreno.bmp',
     'images/boss-minotaur/minotaur-die.png',
     'images/bulletup.png',
-    'images/boss-kobold/kobold.png'
+    'images/boss-kobold/kobold.png',
+    'images/boss-oculo/oculo.png'
 ]);
 resources.onReady(init);
 
@@ -125,7 +126,7 @@ const update = (dt) => {
         }
     }
 
-    if(gameTime > 40){
+    if(gameTime > 40 && gameTime < 70){
         // Exponencia los enemigos en pantalla
             if(Math.random() < 1 - Math.pow(.995, gameTime)) {
                 enemies.push({
@@ -135,8 +136,18 @@ const update = (dt) => {
                 });
             }
         }
-    
 
+        if(gameTime > 75){
+            if(Math.floor(gameTime) > 0){
+                // Exponencia los enemigos en pantalla
+                    if(Math.random() < 1 - Math.pow(.995, gameTime)) {
+                        enemies.push({
+                            pos: [canvas.width,Math.random() * (canvas.height - 39)],
+                            sprite: new Sprite('images/boss-oculo/oculo.png', [0, 35], [117, 62], 16, [0, 1, 2,1,0])
+                        });
+                    }
+                }
+            }
 
     checkCollisions();
 
@@ -265,15 +276,15 @@ const checkCollisions = () => {
                 score += 100;
 
                 if (score == 800){
-                    document.getElementById("messages").innerHTML = "800. Fuckin' Awesome!";
+                    document.getElementById("messages").innerHTML = "800. Empecemos!";
                 } else if (score == 5000){
-                    document.getElementById("messages").innerHTML = "5000. Nice shot!";
+                    document.getElementById("messages").innerHTML = "5000. Bien. Sigue así!";
                 } else if (score == 10000){
-                    document.getElementById("messages").innerHTML = "10,000.Go Go Go!";
+                    document.getElementById("messages").innerHTML = "10,000. Sigue avanzando!";
                 } else if (score == 20000){
-                    document.getElementById("messages").innerHTML = "20,000 points. That's great!";
+                    document.getElementById("messages").innerHTML = "20,000. Gran puntaje!";
                 } else if (score == 80000){
-                    document.getElementById("messages").innerHTML = "80,000 points. You are awesome";
+                    document.getElementById("messages").innerHTML = "80,000. Excelente. Eres de los mejores!";
                 }
 
                 if(gameTime > 0 && gameTime < 35){
@@ -283,13 +294,19 @@ const checkCollisions = () => {
                     });
                 }
                 
-                if(gameTime > 40){
+                if(gameTime > 40 && gameTime < 75){
                     explosions.push({
                         pos: pos,
                         sprite: new Sprite('images/boss-kobold/kobold.png',[272, 140],                                       [68, 35],5,[0, 1, 2, 3, 4],null,true)
                         });
                     }
 
+                if(gameTime > 80){
+                    explosions.push({
+                        pos: pos,
+                        sprite: new Sprite('images/boss-oculo/oculo.png',[0, 500], [120, 105], 16, [0,1,2],null,true)
+                        });
+                    }
                 // Quita la bala y detén la iteración
                 bullets.splice(j, 1);
                 break;
