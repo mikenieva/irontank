@@ -285,7 +285,11 @@ const checkCollisions = () => {
                     document.getElementById("messages").innerHTML = "20,000. Gran puntaje!";
                 } else if (score == 80000){
                     document.getElementById("messages").innerHTML = "80,000. Excelente. Eres de los mejores!";
+                } else if (score == 100000){
+                    document.getElementById("messages").innerHTML = "100,000. Top 1 en Irontank!";
                 }
+
+
 
                 if(gameTime > 0 && gameTime < 40){
                 explosions.push({
