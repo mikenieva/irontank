@@ -287,7 +287,7 @@ const checkCollisions = () => {
                     document.getElementById("messages").innerHTML = "80,000. Excelente. Eres de los mejores!";
                 }
 
-                if(gameTime > 0 && gameTime < 35){
+                if(gameTime > 0 && gameTime < 40){
                 explosions.push({
                     pos: pos,
                     sprite: new Sprite('images/boss-minotaur/minotaur-die.png',[0, 0],                                       [73, 78],14,[0, 1, 2, 3, 4, 5],null,true)
@@ -301,7 +301,7 @@ const checkCollisions = () => {
                         });
                     }
 
-                if(gameTime > 80){
+                if(gameTime > 77){
                     explosions.push({
                         pos: pos,
                         sprite: new Sprite('images/boss-oculo/oculo.png',[0, 500], [120, 105], 16, [0,1,2],null,true)
